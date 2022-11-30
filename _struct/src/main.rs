@@ -5,6 +5,11 @@ struct User {
     sign_in_count: u64,
 }
 
+struct Color(i32, i32, i32);
+struct Point(i32, i32, i32);
+
+struct AlwaysEqual;
+
 fn main() {
     let user1 = User {
         active: true,
@@ -28,19 +33,39 @@ fn main() {
 
     println!("The value of the user2 email is: {}", user2.email);
 
+    let user3 = build_user(
+        String::from("yet_another_user"),
+        String::from("yet_another_user_email@mail.org"),
+    );
 
-    let user3 = build_user(String::from("yet_another_user"), String::from("yet_another_user_email@mail.org"));
-
-    println!("The value of the sign in count for user3 is: {}", user3.sign_in_count);
-
+    println!(
+        "The value of the sign in count for user3 is: {}",
+        user3.sign_in_count
+    );
 
     let user4 = User {
         email: String::from("user4_emails@mail.com"),
         ..user3
     };
 
-    println!("The value of the email and username for user3 are: {}, {}", user4.email, user4.username);
+    println!(
+        "The value of the email and username for user3 are: {}, {}",
+        user4.email, user4.username
+    );
 
+    let black = Color(0, 0, 0);
+    let origin = Point(0, 0, 0);
+
+    println!(
+        "The value within the first index of the black is: {}",
+        black.0
+    );
+    println!(
+        "The value within the second index of the origin is: {}",
+        origin.1
+    );
+
+    let subject = AlwaysEqual;
 }
 
 fn build_user(username: String, email: String) -> User {
@@ -48,6 +73,7 @@ fn build_user(username: String, email: String) -> User {
         username,
         email,
         active: true,
-        sign_in_count: 0
+        sign_in_count: 0,
     }
+
 }
